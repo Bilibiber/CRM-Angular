@@ -1,0 +1,105 @@
+<div class="padding"></div>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form [formGroup]="SignUpForm" (ngSubmit)="signUpSubmit()">
+            <h2>Create Account</h2>
+            <div class="social-container">
+                <a href="#" class="social"><i class="material-icons">local_airport</i></a>
+                <a href="#" class="social"><i class="material-icons">subway</i></a>
+                <a href="#" class="social"><i class="material-icons">train</i></a>
+            </div>
+            <span>or use your email for registration</span>
+            <div class="form-group">
+                <input [class.is-invalid]="SignUpForm.get('userName').invalid && SignUpForm.get('userName').touched"
+                    type="text" placeholder="Name" formControlName="userName" class="form-control" />
+
+                <div *ngIf="SignUpForm.get('userName').invalid && SignUpForm.get('userName').touched">
+                    <small *ngIf="SignUpForm.get('userName').errors?.required" class="text-danger"> Name required
+                    </small>
+                    <small *ngIf="SignUpForm.get('userName').errors?.maxLength" class="text-danger"> Max length exceed
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input [class.is-invalid]="SignUpForm.get('email').invalid && SignUpForm.get('email').touched"
+                    type="email" placeholder="Email" formControlName="email" class="form-control" />
+                <div *ngIf="SignUpForm.get('email').invalid && SignUpForm.get('email').touched">
+                    <small *ngIf="SignUpForm.get('email').errors?.required" class="text-danger"> Email required
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <input [class.is-invalid]="SignUpForm.get('password').invalid && SignUpForm.get('password').touched"
+                    type="password" placeholder="Password" formControlName="password" class="form-control" />
+
+                <div *ngIf="SignUpForm.get('password').invalid && SignUpForm.get('password').touched">
+                    <small *ngIf="SignUpForm.get('password').errors?.required" class="text-danger"> Password required </small>
+                    <small *ngIf="SignUpForm.get('password').errors?.minlength" class="text-danger"> Minimum eight characters</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <input
+                    [class.is-invalid]="SignUpForm.get('confirmPassword').invalid && SignUpForm.get('confirmPassword').touched || SignUpForm.errors?.misMatch"
+                    type="password" placeholder="Confirm Password" formControlName="confirmPassword"
+                    class="form-control" />
+                <small *ngIf="SignUpForm.errors?.misMatch" class="text-danger"> Password do not match </small>
+
+                <div *ngIf="SignUpForm.get('confirmPassword').invalid && SignUpForm.get('confirmPassword').touched">
+                    <small *ngIf="SignUpForm.get('confirmPassword').errors?.required" class="text-danger">
+                        Confirm Password required </small>
+                </div>
+            </div>
+            <div class="form-check md-3">
+                <input type="checkbox" class="form-check-input" formControlName="AgreeToterms">
+                <label class="form-check-label">
+                    Agree to <a href="/terms">Terms</a> and <a href="/privacy">Privacy policy</a>
+                </label>
+            </div>
+            <button class="margin" [disabled]="SignUpForm.invalid">Sign Up</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form [formGroup]="SignInForm">
+            <h2>Sign in</h2>
+            <div class="social-container">
+                <a href="#" class="social"><i class="material-icons">local_airport</i></a>
+                <a href="#" class="social"><i class="material-icons">subway</i></a>
+                <a href="#" class="social"><i class="material-icons">train</i></a>
+            </div>
+            <span>or use your account</span>
+            <div class="form-group">
+                <input [class.is-invalid]="SignInForm.get('email').invalid && SignInForm.get('email').touched"
+                    type="email" placeholder="Email" class="form-control" formControlName="email" />
+                <div *ngIf="SignInForm.get('email').invalid && SignInForm.get('email').touched">
+                    <small *ngIf="SignInForm.get('email').errors?.required" class="text-danger"> Email required </small>
+                    <small *ngIf="SignInForm.get('email').errors?.pattern" class="text-danger"></small>
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control" formControlName="password"/>
+                <div *ngIf="SignInForm.get('password').invalid && SignInForm.get('password').touched">
+                    <small *ngIf="SignInForm.get('password').errors?.required"  class="text-danger"> Password required </small>
+                </div>
+               
+            </div>
+            <a href="#">Forgot your password?</a>
+            <button class="margin"[disabled]="SignInForm.invalid" (click)="SignInFormSubmit()">Sign In</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h2>Welcome Back!</h2>
+                <p>To keep connected with us please login with your personal info</p>
+                <button class="ghost" (click)="SignInClick()">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h2>Hello, Friend!</h2>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" (click)="SignUpClick()">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
